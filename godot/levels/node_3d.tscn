@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://ctahsvj88g1om"]
+
+[ext_resource type="PackedScene" uid="uid://7gv6q50fuutj" path="res://Scenes/Player/player.tscn" id="1_eisjc"]
+[ext_resource type="Script" uid="uid://b5sxh4mg3p8bs" path="res://levels/scene.gd" id="1_euk3g"]
+[ext_resource type="PackedScene" uid="uid://btr6ltov6gwdy" path="res://addons/devblocks/blocks/floor.tscn" id="1_ujgwk"]
+[ext_resource type="PackedScene" uid="uid://b8gry2qgqg3fl" path="res://addons/devblocks/blocks/wall.tscn" id="3_1o5x8"]
+[ext_resource type="PackedScene" uid="uid://bi2qm6q48a21m" path="res://addons/devblocks/blocks/door.tscn" id="4_7qh1q"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6g5uc"]
+
+[sub_resource type="Sky" id="Sky_ivwug"]
+sky_material = SubResource("ProceduralSkyMaterial_6g5uc")
+
+[sub_resource type="Environment" id="Environment_l5pxq"]
+background_mode = 2
+background_color = Color(0.2139, 0.570975, 0.69, 1)
+sky = SubResource("Sky_ivwug")
+
+[node name="Node3d" type="Node3D" unique_id=1559682461]
+script = ExtResource("1_euk3g")
+
+[node name="Floor" parent="." unique_id=48764923 instance=ExtResource("1_ujgwk")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1552972129]
+environment = SubResource("Environment_l5pxq")
+
+[node name="Player" parent="." unique_id=341682174 instance=ExtResource("1_eisjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="DirectionalLight3d" type="DirectionalLight3D" parent="." unique_id=1283224347]
+transform = Transform3D(0.966349, 0.250904, -0.0567091, 0.182362, -0.512743, 0.838951, 0.181419, -0.821061, -0.541244, -0.00693703, 59.5145, -109.348)
+light_energy = 1.232
+light_indirect_energy = 0.884
+light_volumetric_fog_energy = 0.768
+shadow_enabled = true
+
+[node name="RoomStart" type="Node3D" parent="." unique_id=1197219281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+
+[node name="Wall" parent="RoomStart" unique_id=1941181896 instance=ExtResource("3_1o5x8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.922, 3.5, -6.956)
+
+[node name="Door" parent="RoomStart/Wall" unique_id=1527628725 instance=ExtResource("4_7qh1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9915762, 0)
+visible = false
+
+[node name="Wall2" parent="RoomStart" unique_id=27716492 instance=ExtResource("3_1o5x8")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13.5, 3.5, 5.3)
+
+[node name="Wall3" parent="RoomStart" unique_id=1694930027 instance=ExtResource("3_1o5x8")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 11.5, 3.5, 5.3)
+
+[node name="Wall4" parent="RoomStart" unique_id=117209301 instance=ExtResource("3_1o5x8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.922, 3.5, 17.55)
+
+[node name="Timer" type="Timer" parent="." unique_id=429812707]
+process_callback = 0
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

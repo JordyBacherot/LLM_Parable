@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b8gry2qgqg3fl"]
+
+[ext_resource type="Texture2D" uid="uid://vshw25rfhk11" path="res://addons/devblocks/textures/light/texture_07.png" id="1_u6mse"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s006h"]
+albedo_texture = ExtResource("1_u6mse")
+uv1_scale = Vector3(10, 3, 10)
+
+[node name="Wall" type="CSGBox3D" unique_id=355528471]
+use_collision = true
+size = Vector3(25, 7, 0.6)
+material = SubResource("StandardMaterial3D_s006h")

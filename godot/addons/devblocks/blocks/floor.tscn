@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://btr6ltov6gwdy"]
+
+[ext_resource type="Texture2D" uid="uid://d4cjxowa1dyio" path="res://addons/devblocks/textures/dark/texture_04.png" id="1_ma5i8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ma5i8"]
+size = Vector3(100, 0.1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sbne0"]
+albedo_texture = ExtResource("1_ma5i8")
+uv1_scale = Vector3(10, 10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kaevn"]
+material = SubResource("StandardMaterial3D_sbne0")
+size = Vector3(100, 0.1, 100)
+
+[node name="Floor" type="StaticBody3D" unique_id=48764923]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=613280375]
+shape = SubResource("BoxShape3D_ma5i8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=577386877]
+mesh = SubResource("BoxMesh_kaevn")
