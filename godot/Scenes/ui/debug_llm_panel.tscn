@@ -1,0 +1,134 @@
+[gd_scene format=3 uid="uid://cdbgui001llm"]
+
+[ext_resource type="Script" path="res://scripts/ui/debug_llm_panel.gd" id="1_debug_script"]
+
+[node name="DebugLLMPanel" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_debug_script")
+
+[node name="ToggleBtn" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 45.0
+grow_horizontal = 0
+text = "Ouvrir Debug (F1)"
+
+[node name="MainPanel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 55.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplit" type="HSplitContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 380
+
+[node name="Left" type="VBoxContainer" parent="MainPanel/HSplit"]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="MainPanel/HSplit/Left"]
+layout_mode = 2
+text = "=== TEST DES ACTIONS LLM ==="
+horizontal_alignment = 1
+
+[node name="ActionsScroll" type="ScrollContainer" parent="MainPanel/HSplit/Left"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="MainPanel/HSplit/Left/ActionsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="BtnRoomZ1" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "1. Générer Pièce [0, 0, 1]"
+
+[node name="BtnRoomX1" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "2. Générer Pièce [1, 0, 0]"
+
+[node name="BtnStairs" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "3. Générer Escalier [0, 1, 0]"
+
+[node name="BtnSpawnCube" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "4. Faire Apparaître Cube"
+
+[node name="BtnDespawnCube" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "5. Faire Disparaître Cube"
+
+[node name="BtnToggleDoor" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "6. Ajouter/Retirer Porte Nord"
+
+[node name="BtnDropZone" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "7. Créer Zone Dépôt (Plaque)"
+
+[node name="BtnTeleport0" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+text = "8. Téléporter en [0, 0, 0]"
+
+[node name="BtnSimulateAPI" type="Button" parent="MainPanel/HSplit/Left/ActionsScroll/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+text = "9. Simuler Réponse API (Texte + Actions)"
+
+[node name="CustomCommand" type="VBoxContainer" parent="MainPanel/HSplit/Left"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="MainPanel/HSplit/Left/CustomCommand"]
+layout_mode = 2
+text = "Commande JSON brute :"
+
+[node name="JsonInput" type="LineEdit" parent="MainPanel/HSplit/Left/CustomCommand"]
+layout_mode = 2
+placeholder_text = "{\"action\":\"spawn_object\",\"params\":{\"object_type\":\"cube\"}}"
+
+[node name="BtnSendJson" type="Button" parent="MainPanel/HSplit/Left/CustomCommand"]
+layout_mode = 2
+text = "Exécuter l'Action JSON"
+
+[node name="OutputLabel" type="Label" parent="MainPanel/HSplit/Left/CustomCommand"]
+layout_mode = 2
+text = "[Prêt - Appuyez sur F1 pour masquer/afficher]"
+autowrap_mode = 2
+
+[node name="Right" type="VBoxContainer" parent="MainPanel/HSplit"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainPanel/HSplit/Right"]
+layout_mode = 2
+text = "=== ÉTAT SPATIAL ENVOYÉ AU LLM (JSON) ==="
+horizontal_alignment = 1
+
+[node name="StateText" type="TextEdit" parent="MainPanel/HSplit/Right"]
+layout_mode = 2
+size_flags_vertical = 3
+editable = false
+wrap_mode = 1

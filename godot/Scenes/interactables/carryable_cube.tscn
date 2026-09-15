@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b1cube001interact"]
+
+[ext_resource type="Script" path="res://scripts/interactables/carryable.gd" id="1_carryable"]
+[ext_resource type="Texture2D" path="res://addons/devblocks/textures/orange/texture_09.png" id="2_orange_tex"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cube"]
+size = Vector3(0.9, 0.9, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cube"]
+albedo_texture = ExtResource("2_orange_tex")
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_cube"]
+material = SubResource("StandardMaterial3D_cube")
+size = Vector3(0.9, 0.9, 0.9)
+
+[node name="CarryableCube" type="RigidBody3D"]
+mass = 5.0
+script = ExtResource("1_carryable")
+object_type = "cube"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cube")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_cube")

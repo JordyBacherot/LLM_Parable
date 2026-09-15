@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cstairs001mod"]
+
+[ext_resource type="Script" path="res://scripts/modular/stairs_modular.gd" id="1_stairs_script"]
+[ext_resource type="Texture2D" path="res://addons/devblocks/textures/dark/texture_04.png" id="2_stair_tex"]
+[ext_resource type="Texture2D" path="res://addons/devblocks/textures/light/texture_07.png" id="3_wall_tex"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_steps"]
+albedo_texture = ExtResource("2_stair_tex")
+uv1_scale = Vector3(2, 6, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ramp"]
+size = Vector3(10, 0.4, 19)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ramp"]
+material = SubResource("StandardMaterial3D_steps")
+size = Vector3(10, 0.4, 19)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rail"]
+albedo_texture = ExtResource("3_wall_tex")
+uv1_scale = Vector3(3, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rail"]
+material = SubResource("StandardMaterial3D_rail")
+size = Vector3(0.4, 2, 19)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rail"]
+size = Vector3(0.4, 2, 19)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_stair_detect"]
+size = Vector3(12, 8, 20)
+
+[node name="ModularStairs" type="Node3D"]
+script = ExtResource("1_stairs_script")
+
+[node name="Ramp" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.948683, 0.316228, 0, -0.316228, 0.948683, 0, 3, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
+mesh = SubResource("BoxMesh_ramp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp"]
+shape = SubResource("BoxShape3D_ramp")
+
+[node name="LeftRail" type="StaticBody3D" parent="Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp/LeftRail"]
+mesh = SubResource("BoxMesh_rail")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/LeftRail"]
+shape = SubResource("BoxShape3D_rail")
+
+[node name="RightRail" type="StaticBody3D" parent="Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp/RightRail"]
+mesh = SubResource("BoxMesh_rail")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/RightRail"]
+shape = SubResource("BoxShape3D_rail")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 0)
+light_energy = 2.0
+omni_range = 15.0
+
+[node name="DetectionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+shape = SubResource("BoxShape3D_stair_detect")

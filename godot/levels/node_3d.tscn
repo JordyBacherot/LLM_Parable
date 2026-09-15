@@ -5,6 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://btr6ltov6gwdy" path="res://addons/devblocks/blocks/floor.tscn" id="1_ujgwk"]
 [ext_resource type="PackedScene" uid="uid://b8gry2qgqg3fl" path="res://addons/devblocks/blocks/wall.tscn" id="3_1o5x8"]
 [ext_resource type="PackedScene" uid="uid://bi2qm6q48a21m" path="res://addons/devblocks/blocks/door.tscn" id="4_7qh1q"]
+[ext_resource type="Script" path="res://scripts/world/grid_manager.gd" id="5_gridmgr"]
+[ext_resource type="Script" path="res://scripts/llm/llm_action_controller.gd" id="6_actionctrl"]
+[ext_resource type="PackedScene" path="res://Scenes/ui/debug_llm_panel.tscn" id="7_dbgpanel"]
+[ext_resource type="Script" path="res://scripts/llm/llm_connector.gd" id="8_connector"]
+[ext_resource type="PackedScene" path="res://Scenes/ui/narration_hud.tscn" id="9_narrhud"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6g5uc"]
 
@@ -42,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.922, 3.5, -6.956)
 
 [node name="Door" parent="RoomStart/Wall" unique_id=1527628725 instance=ExtResource("4_7qh1q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.9915762, 0)
-visible = false
+size = Vector3(1.5, 2.3, 2.3)
 
 [node name="Wall2" parent="RoomStart" unique_id=27716492 instance=ExtResource("3_1o5x8")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -13.5, 3.5, 5.3)
@@ -56,6 +61,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.922, 3.5, 17.55)
 [node name="Timer" type="Timer" parent="." unique_id=429812707]
 process_callback = 0
 wait_time = 5.0
-autostart = true
+
+[node name="GridManager" type="Node3D" parent="."]
+script = ExtResource("5_gridmgr")
+
+[node name="LLMActionController" type="Node" parent="."]
+script = ExtResource("6_actionctrl")
+
+[node name="LLMConnector" type="Node" parent="."]
+script = ExtResource("8_connector")
+
+[node name="DebugLLMPanel" parent="." instance=ExtResource("7_dbgpanel")]
+
+[node name="NarrationHUD" parent="." instance=ExtResource("9_narrhud")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

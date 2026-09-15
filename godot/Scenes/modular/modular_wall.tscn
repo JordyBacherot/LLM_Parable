@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://cmodwall001"]
+
+[ext_resource type="Texture2D" path="res://addons/devblocks/textures/light/texture_07.png" id="1_wall_tex"]
+[ext_resource type="Texture2D" path="res://addons/devblocks/textures/purple/texture_09.png" id="2_door_tex"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall"]
+albedo_texture = ExtResource("1_wall_tex")
+uv1_scale = Vector3(4, 3, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_side"]
+material = SubResource("StandardMaterial3D_wall")
+size = Vector3(8.5, 6, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_side"]
+size = Vector3(8.5, 6, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_header"]
+material = SubResource("StandardMaterial3D_wall")
+size = Vector3(3, 2.5, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_header"]
+size = Vector3(3, 2.5, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_blocker"]
+material = SubResource("StandardMaterial3D_wall")
+size = Vector3(3, 3.5, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_blocker"]
+size = Vector3(3, 3.5, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_door"]
+albedo_texture = ExtResource("2_door_tex")
+uv1_scale = Vector3(2, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_leaf"]
+material = SubResource("StandardMaterial3D_door")
+size = Vector3(3, 3.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_leaf"]
+size = Vector3(3, 3.5, 0.1)
+
+[node name="ModularWall" type="Node3D"]
+
+[node name="LeftSection" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75, 3, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftSection"]
+mesh = SubResource("BoxMesh_side")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeftSection"]
+shape = SubResource("BoxShape3D_side")
+
+[node name="RightSection" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 3, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightSection"]
+mesh = SubResource("BoxMesh_side")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RightSection"]
+shape = SubResource("BoxShape3D_side")
+
+[node name="HeaderSection" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="HeaderSection"]
+mesh = SubResource("BoxMesh_header")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeaderSection"]
+shape = SubResource("BoxShape3D_header")
+
+[node name="DoorBlocker" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorBlocker"]
+mesh = SubResource("BoxMesh_blocker")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorBlocker"]
+shape = SubResource("BoxShape3D_blocker")
+
+[node name="DoorLeaf" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoorLeaf"]
+mesh = SubResource("BoxMesh_leaf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorLeaf"]
+shape = SubResource("BoxShape3D_leaf")
+disabled = true

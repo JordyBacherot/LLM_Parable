@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://narr001hud"]
+
+[ext_resource type="Script" path="res://scripts/ui/narration_hud.gd" id="1_narrscript"]
+
+[node name="NarrationHUD" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_narrscript")
+
+[node name="SubtitlePanel" type="PanelContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 60.0
+offset_top = 25.0
+offset_right = -60.0
+offset_bottom = 90.0
+grow_horizontal = 2
+
+[node name="Margin" type="MarginContainer" parent="SubtitlePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 10
+
+[node name="SubtitleLabel" type="Label" parent="SubtitlePanel/Margin"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.8, 1)
+theme_override_font_sizes/font_size = 18
+text = "Bienvenue dans le centre de test."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HintLabel" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -35.0
+offset_right = 600.0
+offset_bottom = -10.0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 0.8)
+theme_override_font_sizes/font_size = 14
+text = "[T / Entrée] Parler à l'IA | [E] Porter / Lâcher | [F1] Console de Test"
+
+[node name="ChatContainer" type="PanelContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -90.0
+offset_right = -100.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="ChatContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="HBox" type="HBoxContainer" parent="ChatContainer/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Prefix" type="Label" parent="ChatContainer/Margin/HBox"]
+layout_mode = 2
+text = "Vous :"
+
+[node name="ChatInput" type="LineEdit" parent="ChatContainer/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Dites quelque chose à l'IA narratrice..."
+
+[node name="SendBtn" type="Button" parent="ChatContainer/Margin/HBox"]
+layout_mode = 2
+text = "Envoyer"
